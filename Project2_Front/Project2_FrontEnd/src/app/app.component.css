@@ -1,0 +1,17 @@
+app-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4rem;
+    background-color: #673ab7;
+    color: rgb(252, 252, 252);
+}
+body {
+    margin-bottom: 4rem;
+}
+.authors {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}

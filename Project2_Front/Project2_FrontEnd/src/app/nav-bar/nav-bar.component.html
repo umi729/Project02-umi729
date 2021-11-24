@@ -1,0 +1,68 @@
+<mat-toolbar color="primary" class="app-header">
+  <div>
+    <a routerLink="{{route}}" routerLinkActive="active" class="home inline"><H1>MovieBook</H1></a>
+  </div>
+  <span class="nav-tool-items2">
+    <h2 *ngIf="show == 0; then ifblock; else elseBlock"></h2>
+    <ng-template #ifblock>
+      <div class="nav2">
+        <a
+          mat-button
+          mat-raised-button
+          class="navbutton"
+          color="primary"
+          routerLink="login"
+          routerLinkActive="active"
+          >Log in
+        </a>
+        <a
+          mat-button
+          mat-raised-button
+          class="navbutton"
+          color="primary"
+          routerLink="register"
+          routerLinkActive="active"
+          >Register
+        </a>
+      </div>
+    </ng-template>
+    <ng-template #elseBlock>
+      <div class="nav2">
+        <a routerLink="/home" routerLinkActive="active" class="navbutton">
+          <button mat-mini-fab color="primary" aria-label="home button">
+            <mat-icon>home</mat-icon>
+          </button>
+        </a>
+        <a
+          mat-button
+          mat-raised-button
+          class="navbutton"
+          color="primary"
+          routerLink="/favlist"
+          routerLinkActive="active"
+          >My Favorites
+        </a>
+        <a
+          mat-button
+          mat-raised-button
+          class="navbutton"
+          color="primary"
+          routerLinkActive="active"
+          routerLink="changepass"
+          >Change Password</a
+        >
+
+        <a
+          mat-button
+          mat-raised-button
+          class="navbutton"
+          color="primary"
+          routerLinkActive="active"
+          (click)="logout()"
+          >Logout</a
+        >
+      </div>
+    </ng-template>
+  </span>
+</mat-toolbar>
+

@@ -1,0 +1,12 @@
+package com.revature.models;
+
+package com.revature.models;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import com.revature.models.User;
+import com.revature.models.Movie;
+import javax.persistence.OneToOne;
+
+public class User {
+
+}

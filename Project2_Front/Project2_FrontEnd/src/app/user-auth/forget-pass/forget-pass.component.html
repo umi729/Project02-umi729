@@ -1,0 +1,42 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Forget Password</mat-card-title>
+    </mat-card-header>
+
+    <form class="example-form" [formGroup]=form autocomplete="off" novalidate (ngSubmit)="resetpass(form.value)">
+      <mat-card-content>
+       
+        <mat-form-field class="example-full-width">
+          <input matInput  placeholder="Name" type="text" name="dname" formControlName="dname" id="dname">
+         
+          <mat-error *ngIf="hasError('dname', 'required')">Display Name is required</mat-error>
+          <mat-error *ngIf="hasError('dname', 'maxlength')">You have more than 20 characters</mat-error>
+        
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" type="text" name="email" formControlName="email" id="email">
+          <mat-hint align="end">example@example.com</mat-hint>
+          <mat-error *ngIf="hasError('email', 'required')">Email is required</mat-error>
+          <mat-error *ngIf="hasError('email', 'email')">please check the email carefully</mat-error>
+        
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Username" type="text" name="username" formControlName="username" id="username">
+          <mat-hint align="end">Not more then 20 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('username', 'required')">Username is required</mat-error>
+          <mat-error *ngIf="hasError('username', 'maxlength')">You have more than 20 characters</mat-error>
+        
+        </mat-form-field> 
+
+        
+
+      </mat-card-content>
+
+      <button mat-stroked-button color="accent" class="btn-block" type="submit" [disabled]="form.invalid">Reset My Password</button>
+
+    </form>
+  </mat-card>
+</div>

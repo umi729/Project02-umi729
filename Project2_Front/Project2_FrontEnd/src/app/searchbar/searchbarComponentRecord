@@ -1,0 +1,273 @@
+// import { Component, OnInit, Renderer2 } from '@angular/core';
+// import { Observable } from 'rxjs';
+
+// import { Movie } from '../models/movie';
+
+// import { MovieToBackendService } from '../services/movie-to-backend.service';
+// import { HideComponentService } from '../services/hide-component.service';
+// import { DateFormaterService } from '../services/date-formater.service';
+// import { ApiService } from '../services/api.service';
+
+// @Component({
+//   selector: 'app-searchbar',
+//   templateUrl: './searchbar.component.html',
+//   styleUrls: ['./searchbar.component.css']
+// })
+
+
+
+// export class SearchbarComponent implements OnInit {
+
+//   // VV API QUery URL Constant Variables
+//   // VV ==================================
+//   private readonly url : String = "http://www.omdbapi.com/";
+//   private readonly titleQuery : String = "?s=";
+//   private readonly apiKeyTag : String = "&apikey=";
+//   // VV Unique Per Account - It Is 1000 / Day
+//   private readonly apiKey : String = "a0e606bd";
+ 
+
+//   // VV Search Bar HTML Element Variables
+//   // VV ===================================
+//   private searchDiv : HTMLElement = document.createElement('div');
+
+//   private heading1 : HTMLElement = document.createElement('h1');
+//   private para1 : HTMLElement = document.createElement('p');
+
+//   private button1 : HTMLElement = document.createElement('button');
+//   private button2 : HTMLElement = document.createElement('button');
+
+//   private form1 : HTMLElement = document.createElement('form');
+//   private label1 : HTMLElement = document.createElement('label');
+//   private input1 : HTMLElement = document.createElement('input');
+
+//   private inputString : String = "";
+
+//   private movieQueryResult : Object = {title : String, director : String,
+//     genre : String, release : String, synopsis : String
+//   };
+
+
+
+//   constructor( 
+//     private renderer : Renderer2,
+//     private movieToBackend : MovieToBackendService,
+//     private hider : HideComponentService,
+//     private dateFromatter : DateFormaterService,
+//     private apiServicer : ApiService
+//   ) { }
+
+
+
+//   ngOnInit(): void {
+
+//     console.log("Search Init");
+
+//     this.renderer.appendChild(document.querySelector('app-searchbar'), this.searchDiv);
+
+//     //this.renderer.setStyle(document.querySelector('app-searchbar'), 'display', "flex");
+
+//     this.renderer.setStyle(this.searchDiv, 'display', "flex");
+//     this.renderer.setStyle(this.searchDiv, 'margin', "2px");
+
+
+//     this.renderer.setStyle(this.searchDiv, 'border', "solid");
+//     this.renderer.setStyle(this.searchDiv, 'background-color', "red");
+
+//     this.heading1.innerText = "Search Bar!!";
+//     this.renderer.appendChild(this.searchDiv, this.heading1);
+
+//     this.renderer.appendChild(this.searchDiv, this.form1);
+
+//     this.label1.innerText = "Enter Movie : ";
+//     this.renderer.setAttribute(this.label1, 'for', "searchEntry");
+//     this.renderer.appendChild(this.form1, this.label1);
+
+//     this.renderer.setAttribute(this.input1, 'type', "text");
+//     this.renderer.setAttribute(this.input1, 'id', "searchEntry");
+//     this.renderer.setAttribute(this.input1, 'name', "searchEntry");
+//     this.renderer.appendChild(this.form1, this.input1);
+
+//     this.button2.innerText = "  Search Movie  ";
+//     this.renderer.listen(this.button2, 'click', () => {
+//       this.getInputString(this.input1);
+//       this.queryAPI();
+//     });
+//     this.renderer.appendChild(this.searchDiv, this.button2);
+
+//     this.button1.innerText = "Hide Search Bar";
+//     this.renderer.listen(this.button1, 'click', () => {
+
+//       this.hider.hideComponent(this.searchDiv);//, this.renderer);
+
+//     });
+//     this.renderer.appendChild(this.searchDiv, this.button1);
+
+//   }
+
+//   hideSearch(body : HTMLElement, renderer : Renderer2) : void {
+
+//     this.hider.hideComponent(body);//, renderer);
+
+//   }
+
+//   // VV Gets The Input String From The Input Field Of The Form
+//   // VV When The Search Movie Button Is Pressed
+//   getInputString( inputField : HTMLElement) {
+
+//     this.inputString = (document.getElementById(inputField.id) as HTMLInputElement).value;
+
+//     console.log("Input String : " + this.inputString);
+
+//     // VV Spaces Need To Be + In The API Request
+//     // VV ' Need To Be %27 In The API Request
+//     for (let i = 0; i < this.inputString.length; ++ i) {
+
+//       let regularExpression1 = /\s/;
+//       let replacement1 = "+";
+
+//       this.inputString = this.inputString.replace(regularExpression1, replacement1);
+
+//       let regularExpression2 = /'/;
+//       let replacement2 = "%27";
+
+//       this.inputString = this.inputString.replace(regularExpression2, replacement2);
+
+//       //console.log("Index " + i + " : " + this.inputString[i]);
+
+//     }
+
+//   }
+
+//   async queryAPI () {
+
+//     let apiquery : String = this.url.toString() 
+//       + this.titleQuery.toString() 
+//       + this.inputString.toString()
+//       + this.apiKeyTag.toString() 
+//       + this.apiKey.toString();
+
+    
+//     console.log("API Query : " + apiquery);
+
+// /*
+//     let result = this.apiServicer.queryAPI(this.inputString);
+
+//     console.log("JRIOJROIJIORJIOJRO Rexult VV " );
+//     console.log(result);
+// */
+
+//     /*
+//     this.apiServicer.queryResults(this.inputString).subscribe(
+//       data => {
+//         //let result : any = 
+//         console.log("===== The Response : ");
+//         console.log(data);
+//       }
+//     )
+// */
+
+//     /*
+//     this.apiServicer.queryTitle(this.inputString).subscribe(
+//       data => {
+//         //let result : any = 
+//         console.log("===== The Response : ");
+//         console.log(data);
+//       }
+//     )
+//     */
+//     /*
+//     this.apiServicer.queryAPI(apiquery).subscribe(
+//       data => {
+//         //let result : any = 
+//         console.log("===== The Response : ");
+//         console.log(data);
+//       }
+//     )
+//     */
+
+// /*
+//     this.movieToBackend.generateToken(queryMovie).subscribe(
+//       data => {
+//         let tokenized : any = sessionStorage.setItem("token", data.toString());
+//         console.log(data);
+//       }
+//     )
+// */
+
+//     //let data : Movie = new Movie("", "", "", "", "");
+
+//     let response = await fetch(apiquery.toString());
+
+//     let data = await response.json();
+
+//     console.log("Response Data : " + data);
+
+//     console.log("Title : " + Object(data).Title);
+//     console.log("Released : " + Object(data).Released);
+//     console.log("Plot : " + Object(data).Plot);
+//     console.log("Genre : " + Object(data).Genre);
+//     console.log("Director : " + Object(data).Director);
+
+//     this.movieQueryResult = {
+//       title : Object(data).Title,
+//       director : Object(data).Director,
+//       genre : Object(data).Genre,
+//       release : Object(data).Released,
+//       synopsis : Object(data).Plot
+//     }
+  
+
+//     console.log("\n");
+//     console.log("Object Created : " + this.movieQueryResult);
+
+//     console.log("title : " + Object(this.movieQueryResult).title);
+//     console.log("release : " + Object(this.movieQueryResult).release);
+//     console.log("synopsis : " + Object(this.movieQueryResult).synopsis);
+//     console.log("genre : " + Object(this.movieQueryResult).genre);
+//     console.log("director : " + Object(this.movieQueryResult).director);
+
+//     let queryMovie : Movie = {
+//       title : Object(data).Title,
+//       director : Object(data).Director,
+//       genre : Object(data).Genre,
+//       release : Object(data).Released,
+//       synopsis : Object(data).Plot
+//     }
+
+//     console.log(queryMovie);
+
+//     let sender : string = "ABCDEFG";
+
+//     sender = queryMovie.release.toString();
+
+//     console.log("Sending : " + sender);
+
+//     let formattedDate : String = this.dateFromatter.formatDate(sender);
+
+//     console.log("Received Date : " + formattedDate.toString());
+
+//     queryMovie.release = formattedDate;
+
+//     console.log("FOrmatted Date For Backend : " + queryMovie.release);
+//     console.log(queryMovie);
+
+//     //this.movieToBackend.addMovie(queryMovie);
+
+    
+
+//     this.movieToBackend.generateToken(queryMovie).subscribe(
+//       data => {
+//         let tokenized : any = sessionStorage.setItem("token", data.toString());
+//         console.log(data);
+//       }
+//     )
+
+    
+
+//   }
+
+
+  
+
+// }

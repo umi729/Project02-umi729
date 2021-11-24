@@ -1,0 +1,29 @@
+<form #form="ngForm" id = "SearchMovieForm" 
+    
+    (ngSubmit)="dosomething(form.value)" 
+    
+>
+
+
+    <label for = "SearchMovieInput" class = "mb-2"
+        id = "SearchMovieLabel">
+        Search Movie 
+    </label>
+
+    <input type="text" name="seah"  ngModel id = "SearchMovieInput"
+        placeholder="To Update Your Results Below Enter A Movie To Search For!!"
+        class="col-sm-8" >  <!--aria-describedby="SearchFieldInstruction"-->
+    
+
+    <button type="submit" class = "col-sm-2" id = "SearchMovieButton">Search Movie</button>
+
+    <!--
+    <small id="SearchFieldInstruction" class="form-text text-muted">
+        To Update Your Results Below Enter A Movie To Search For!!
+    </small>
+    -->
+    
+
+</form>
+
+<p id = "FormBottomBorder"></p>

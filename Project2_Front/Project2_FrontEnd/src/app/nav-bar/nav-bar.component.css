@@ -1,0 +1,50 @@
+.mat-toolbar-row, .mat-toolbar-single-row {
+    display: flex;
+    box-sizing: border-box;
+    padding: 0 16px;;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    justify-content: space-between;
+}
+.log {
+    margin-right:8px;
+    line-height: 30px;
+}
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+    background-color: #40276c;
+}
+.navbutton {
+    margin-right: 8px;
+}
+.inline {
+    float: left;
+    display: inline;
+    margin-right: 8px;
+}
+.home {
+    margin-top: 5px;
+}
+.icon {
+    margin-top: 3px;
+}
+.home:link {
+    text-decoration: none;
+    color: white;
+}
+
+.home:visited {
+    text-decoration: none;
+    color: white;
+}
+
+.home:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.home:active {
+    text-decoration: none;
+    color: white;
+}

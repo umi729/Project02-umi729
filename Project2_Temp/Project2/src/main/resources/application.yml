@@ -1,0 +1,25 @@
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+server:
+  port: 8085
+  servlet:
+    context-path: /
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: password
+    url: jdbc:postgresql://javafx-210827.c6khjwo6tij9.us-east-2.rds.amazonaws.com:5432/javafs210927
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        default_schema: project2
+    show-sql: true

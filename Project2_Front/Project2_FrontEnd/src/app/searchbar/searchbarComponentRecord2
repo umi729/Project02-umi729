@@ -1,0 +1,257 @@
+
+//   // VV API QUery URL Constant Variables
+//   // VV ==================================
+//   private readonly url : String = "http://www.omdbapi.com/";
+//   private readonly titleQuery : String = "?t=";
+//   private readonly apiKeyTag : String = "&apikey=";
+//   // VV Unique Per Account - It Is 1000 / Day
+//   private readonly apiKey : String = "a0e606bd";
+ 
+
+//   // VV Search Bar HTML Element Variables
+//   // VV ===================================
+//   private searchDiv : HTMLElement = document.createElement('div');
+
+//   private heading1 : HTMLElement = document.createElement('h1');
+//   private para1 : HTMLElement = document.createElement('p');
+
+//   private button1 : HTMLElement = document.createElement('button');
+//   private button2 : HTMLElement = document.createElement('button');
+
+//   private form1 : HTMLElement = document.createElement('form');
+//   private label1 : HTMLElement = document.createElement('label');
+//   private input1 : HTMLElement = document.createElement('input');
+
+//   private inputString : String = "";
+
+//   private movieQueryResult : Object = {title : String, director : String,
+//     genre : String, release : String, synopsis : String
+//   };
+
+//   private resultMovie : Movie = new Movie("", "", "", "", "");
+
+//   @Output() outputMovie = new EventEmitter();//<Movie>();
+
+//   constructor( 
+//     private renderer : Renderer2,
+//     private movieToBackend : MovieToBackendService,
+//     private hider : HideComponentService,
+//     private dateFromatter : DateFormaterService,
+//     private apiServicer : ApiService,
+//     private movieInfoHoler : MovieInfoHolderService
+//   ) { }
+
+
+
+//   ngOnInit(): void {
+
+//     console.log("Search Init");
+
+//     this.renderer.appendChild(document.querySelector('app-searchbar'), this.searchDiv);
+
+//     //this.renderer.setStyle(document.querySelector('app-searchbar'), 'display', "flex");
+
+//     //this.renderer.setStyle(this.searchDiv, 'display', "flex");
+//     //this.renderer.setStyle(this.searchDiv, 'margin', "2px");
+//     this.renderer.setAttribute(this.searchDiv, 'id', "searchdiv");
+
+
+//     this.renderer.setStyle(this.searchDiv, 'border', "solid");
+//     this.renderer.setStyle(this.searchDiv, 'background-color', "rgb(200, 200, 255");
+//     //this.renderer.setStyle(this.heading1, 'margin', "10px, 13px");
+
+//     this.renderer.setStyle(this.searchDiv, 'margin-left', "2%");
+//     this.renderer.setStyle(this.searchDiv, 'margin-right', "2%");
+//     this.renderer.setStyle(this.searchDiv, 'margin-bottom', "8px");
+//     this.renderer.setStyle(this.searchDiv, 'padding-left', "3%");
+//     this.renderer.setStyle(this.searchDiv, 'padding-right', "3%");
+//     this.renderer.setStyle(this.searchDiv, 'padding-top', "8px");
+//     this.renderer.setStyle(this.searchDiv, 'padding-bottom', "15px");
+
+    
+//     this.renderer.setStyle(this.label1, 'color', "black");
+//     this.renderer.setStyle(this.heading1, 'color', "black");
+
+//     this.heading1.innerText = "Search Bar!!";
+//     this.renderer.appendChild(this.searchDiv, this.heading1);
+
+//     this.renderer.appendChild(this.searchDiv, this.form1);
+
+//     this.label1.innerText = "Enter Movie : ";
+//     this.renderer.setAttribute(this.label1, 'for', "searchEntry");
+//     this.renderer.appendChild(this.form1, this.label1);
+
+//     this.renderer.setAttribute(this.input1, 'type', "text");
+//     this.renderer.setAttribute(this.input1, 'id', "searchEntry");
+//     this.renderer.setAttribute(this.input1, 'name', "searchEntry");
+//     this.renderer.setStyle(this.input1, 'width', "80%");
+//     this.renderer.appendChild(this.form1, this.input1);
+
+
+
+//     this.button2.innerText = "  Search Movie  ";
+//     this.renderer.listen(this.button2, 'click', () => {
+//       this.getInputString(this.input1);
+//       this.queryAPI();
+//       this.sendMovie(this.resultMovie);
+
+//     });
+//     this.renderer.appendChild(this.searchDiv, this.button2);
+
+
+
+//     this.button1.innerText = "Hide Search Bar";
+//     this.renderer.listen(this.button1, 'click', () => {
+
+//       this.hider.hideComponent(this.searchDiv);//, this.renderer);
+
+//     });
+//     this.renderer.appendChild(this.searchDiv, this.button1);
+
+//   }
+
+//   hideSearch(body : HTMLElement, renderer : Renderer2) : void {
+
+//     this.hider.hideComponent(body);//, renderer);
+
+//   }
+
+//   // VV Gets The Input String From The Input Field Of The Form
+//   // VV When The Search Movie Button Is Pressed
+//   getInputString( inputField : HTMLElement) {
+
+//     this.inputString = (document.getElementById(inputField.id) as HTMLInputElement).value;
+
+//     console.log("Input String : " + this.inputString);
+
+//     // VV Spaces Need To Be + In The API Request
+//     // VV ' Need To Be %27 In The API Request
+//     for (let i = 0; i < this.inputString.length; ++ i) {
+
+//       let regularExpression1 = /\s/;
+//       let replacement1 = "+";
+
+//       this.inputString = this.inputString.replace(regularExpression1, replacement1);
+
+//       let regularExpression2 = /'/;
+//       let replacement2 = "%27";
+
+//       this.inputString = this.inputString.replace(regularExpression2, replacement2);
+
+//       //console.log("Index " + i + " : " + this.inputString[i]);
+
+//     }
+
+//   }
+
+//   async queryAPI () {
+
+//     let apiquery : String = this.url.toString() 
+//       + this.titleQuery.toString() 
+//       + this.inputString.toString()
+//       + this.apiKeyTag.toString() 
+//       + this.apiKey.toString();
+
+    
+//     console.log("API Query : " + apiquery);
+
+//     //let data : Movie = new Movie("", "", "", "", "");
+
+//     let response = await fetch(apiquery.toString());
+
+//     let data = await response.json();
+
+//     console.log("Response Data : " + data);
+//     console.log(data);
+
+//     console.log("Title : " + Object(data).Title);
+//     console.log("Released : " + Object(data).Released);
+//     console.log("Plot : " + Object(data).Plot);
+//     console.log("Genre : " + Object(data).Genre);
+//     console.log("Director : " + Object(data).Director);
+
+//     this.movieQueryResult = {
+//       title : Object(data).Title,
+//       director : Object(data).Director,
+//       genre : Object(data).Genre,
+//       release : Object(data).Released,
+//       synopsis : Object(data).Plot
+//     }
+  
+
+//     console.log("\n");
+//     console.log("Object Created : " + this.movieQueryResult);
+
+//     console.log("title : " + Object(this.movieQueryResult).title);
+//     console.log("release : " + Object(this.movieQueryResult).release);
+//     console.log("synopsis : " + Object(this.movieQueryResult).synopsis);
+//     console.log("genre : " + Object(this.movieQueryResult).genre);
+//     console.log("director : " + Object(this.movieQueryResult).director);
+
+//     let queryMovie : Movie = {
+//       title : Object(data).Title,
+//       director : Object(data).Director,
+//       genre : Object(data).Genre,
+//       release : Object(data).Released,
+//       synopsis : Object(data).Plot
+//     }
+
+//     console.log(queryMovie);
+
+//     let sender : string = "ABCDEFG";
+
+//     sender = queryMovie.release.toString();
+
+//     console.log("Sending : " + sender);
+
+//     let formattedDate : String = this.dateFromatter.formatDate(sender);
+
+//     console.log("Received Date : " + formattedDate.toString());
+
+//    // queryMovie.release = formattedDate;
+
+//     console.log("FOrmatted Date For Backend : " + queryMovie.release);
+//     console.log(queryMovie);
+
+//     //this.movieToBackend.addMovie(queryMovie);
+
+
+//     this.movieInfoHoler.setMovie(queryMovie);
+//     this.movieInfoHoler.getMovie();
+
+//     this.resultMovie = queryMovie;
+    
+//     this.sendMovie(queryMovie);
+
+
+    // this.movieToBackend.generateToken(queryMovie).subscribe(
+    //   data => {
+    //     let tokenized : any = sessionStorage.setItem("token", data.toString());
+    //     console.log(data);
+    //   }
+    // )
+
+
+    
+
+//   }
+
+//   // VV Declaration
+//   //@Output() outputMovie = new EventEmitter<Movie>();
+
+
+//   sendMovie(movie : Movie) {
+
+//     console.log("\n\n\n");
+//     console.error("Emitting Movie");
+//     console.error(movie);
+
+//     this.outputMovie.emit(movie);
+//     console.error(this.outputMovie.emit(movie));
+
+//   }
+
+
+  
+
+// }

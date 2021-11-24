@@ -1,0 +1,70 @@
+
+<!-- 
+<label for="try2" id="try2"> Search Movie </label>
+<input type="text" name="name2" id="try2" #MovieEntered 
+(keyup.enter)="function2(MovieEntered.value)" 
+(blur)="function2(MovieEntered.value); MovieEntered.value = ''">
+<button (click) = function2(MovieEntered.value)>clickMovie</button>
+ -->
+
+
+<form id = "SearchMovieForm">
+
+    <label for="SearchMovieInput" id="SearchMovieLabel" class = "col-sm-12"> Search For A Movie!! </label>
+
+    <div id="SearchContainer"> 
+
+        <input type="text" name="name2" id="SearchMovieInput" #MovieEntered class="col-sm-9"
+        placeholder="To Update Your Results Below Enter A Movie To Search For!!"
+        (keyup.enter)="function2(MovieEntered.value)" 
+        (blur)="function2(MovieEntered.value); MovieEntered.value = ''">
+
+        <button (click) = function2(MovieEntered.value) id = "SearchMovieButton"
+            class = "col-sm-2">Search Movie</button>
+
+    </div>
+    
+
+</form>
+
+
+<p id="SearchBorderParagraph"></p>
+
+
+<!-- 
+
+<form #searchform="ngForm" id = "SearchMovieForm" 
+    (ngSubmit)=" (searchform.value) ? dosomething(searchform) : dosomething2()"  
+    >
+dosomething(searchform)"
+
+    <label for = "SearchMovieInput" class = "mb-2"
+        id = "SearchMovieLabel">
+        Search Movie 
+    </label>
+
+     Failed Attributes For Fix
+minlength = "1"
+appForbiddenName = "undefined"
+    
+
+    <input type="text" name="seah"  ngModel id = "SearchMovieInput"
+        placeholder="To Update Your Results Below Enter A Movie To Search For!!"
+        class="col-sm-8 " >  aria-describedby="SearchFieldInstruction"
+    
+
+    <button type="submit" class = "col-sm-2" id = "SearchMovieButton" >Search Movie</button>
+
+    <p id="ChangerID"></p>
+    
+    <small id="SearchFieldInstruction" class="form-text text-muted">
+        To Update Your Results Below Enter A Movie To Search For!!
+    </small>
+   
+    
+
+</form>
+
+
+<p id = "FormBottomBorder"></p> -->
+

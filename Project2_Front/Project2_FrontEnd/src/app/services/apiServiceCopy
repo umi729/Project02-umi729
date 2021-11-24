@@ -1,0 +1,197 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ApiService {
+
+  private readonly toLocalPort : String = 'http://localhost:8085/';
+
+  private readonly apiURL : String = "http://www.omdbapi.com/";
+  private readonly dataQuery : String = "?t=";
+  private readonly resultsQuery : String = "?s=";
+  private readonly idQuery : String = "?i";
+  private readonly apiKeyTag : String = "&apikey=";
+  // VV Unique Per Account - It Is 1000 / Day
+  private readonly apiKey : String = "a0e606bd";
+
+  private imdbID : String = "Empty IMDBID : NOt Initialized";
+
+  constructor(private httpclient : HttpClient) { }
+
+
+  public queryTitle(title : String) : Observable<ArrayBuffer> {
+
+    console.log("Title Check For : " + title);
+
+    let titleURL = this.formatURLDataT(title);
+
+    console.log("Prepared URL : " + titleURL);
+
+    //return new Observable<ArrayBuffer>();
+
+    return this.httpclient.get<ArrayBuffer>(titleURL.toString());
+
+  }
+
+  public async queryResults(title : String) : Promise<ArrayBuffer> {
+
+    console.log("Results Check For : " + title);
+
+    let resultsURL = this.formatURLResultsS(title);
+
+    console.log("Prepared URL : " + resultsURL);
+
+    //return new Observable<ArrayBuffer>();
+
+    return await this.httpclient.get<ArrayBuffer>(resultsURL.toString()).toPromise();
+
+  }
+  
+  public queryID(ID : String) : Observable<ArrayBuffer> {
+
+    console.log("Results Check For : " + ID);
+
+    let resultsURL = this.formatURLResultsS(ID);
+
+    console.log("Prepared URL : " + resultsURL);
+
+    //return new Observable<ArrayBuffer>();
+
+    return this.httpclient.get<ArrayBuffer>(resultsURL.toString());
+
+  }
+
+
+  public async queryAPI(title : String) : Promise<ArrayBuffer> {
+
+    console.log("Querying API For Title : " + title);
+/*
+    this.queryResults(title).subscribe(
+      data => {
+        //let result : any = 
+        console.log("===== The Response : ");
+        console.log(data);
+      }
+    )
+*/
+
+    console.log("Getting PRomise");
+    let data = await this.queryResults(title);
+    console.log("Promise : ");
+    console.log(data);
+
+    //let imdbID : String;
+
+    //let result : ArrayBuffer;
+
+    let test : String = "Empty Test";
+
+    this.queryTitle(title).subscribe(
+      data => {
+        //let result : any = 
+        console.log("===== The Response : ");
+        console.log(data);
+
+        //imdbID = Object(data).imdbID;
+
+        console.log("Inner Found VV " );
+        console.log(Object(data).imdbID);
+
+        test = "Added";
+
+        //let copied : string = new (Object(data).imdbID).toString();
+
+        //this.imdbID = copied;
+
+
+
+        //result = data;
+
+        //return result;
+
+      }//,
+      //complete => { imdbID = Object(complete).imdbID; }
+    )
+
+    console.log("Hopefully THis IS An ID");
+    console.log(this.imdbID);
+
+    console.log(test);
+
+    //console.log(result);
+
+    console.log("\n" + "RETURNING NOW JIOSDJFIOJSDIOFJSDIOJFIOSDJOIFJS");
+
+    return new Observable<ArrayBuffer>().toPromise();
+
+  }
+/*
+  public queryAPI(url : String) : Observable<ArrayBuffer> {
+
+    console.log("Doing The API Thing");
+
+    return this.httpclient.get<ArrayBuffer>(url.toString());//, httpOptions);
+
+  }
+*/
+  public formatURLDataT(title : String) : String {
+
+    console.log("Starting Title : " + title);
+
+    let apiquery : String = 
+      this.apiURL.toString()
+      + this.dataQuery.toString()
+      + title.toString()
+      + this.apiKeyTag.toString()
+      + this.apiKey.toString()
+    ;
+      
+    console.log("created URL : " + apiquery);
+
+    return apiquery;
+
+  }
+
+
+  public formatURLResultsS(title : String) : String {
+
+    console.log("Starting Title : " + title);
+
+    let apiquery : String = 
+      this.apiURL.toString()
+      + this.resultsQuery.toString()
+      + title.toString()
+      + this.apiKeyTag.toString()
+      + this.apiKey.toString()
+    ;
+      
+    console.log("created URL : " + apiquery);
+
+    return apiquery;
+
+  }
+
+  
+  public formatURLimdbID(ID : String) : String {
+
+    console.log("Starting ID : " + ID);
+
+    let apiquery : String = 
+      this.apiURL.toString()
+      + this.resultsQuery.toString()
+      + ID.toString()
+      + this.apiKeyTag.toString()
+      + this.apiKey.toString()
+    ;
+      
+    console.log("created URL : " + apiquery);
+
+    return apiquery;
+
+  }
+
+
+}

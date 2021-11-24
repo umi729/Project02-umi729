@@ -1,0 +1,285 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+
+import { ImdbMultiData } from '../models/imdb-multi-data';
+import { Movie } from '../models/movie';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ApiService {
+
+  private readonly toLocalPort : String = 'http://localhost:8085/';
+
+  private readonly apiURL : String = "http://www.omdbapi.com/";
+  private readonly dataQuery : String = "?t=";
+  private readonly resultsQuery : String = "?s=";
+  private readonly idQuery : String = "?i=";
+  private readonly apiKeyTag : String = "&apikey=";
+  // VV Unique Per Account - It Is 1000 / Day
+  private readonly apiKey : String = "a0e606bd";
+
+  private imdbID : String = "Empty IMDBID : NOt Initialized";
+
+  private foundMovie : Movie | null = null;
+  private returnMovies : Array<Array<Movie>> = new Array(1);
+
+  constructor(private httpclient : HttpClient) { }
+
+
+  public getMovies(imdbID : String) : Observable<any> {
+
+    console.log(imdbID);
+
+    return new Observable<any>();
+
+  }
+
+
+  public queryAPI(title : String) : Observable<Array<Array<Movie>>> {
+
+    console.log("Querying API For Title : " + title);
+
+
+    this.queryResults(title).pipe(
+        switchMap( data => this.getMovies(Object(data).Search[0].imdbID)
+      ).subscribe (
+      data => {
+
+        console.log("Results Data : ");
+        console.log(data);
+
+        let activeObject : ImdbMultiData;
+
+        let searchLength : number = Object(data).Search.length;
+
+        let movies : Array<Movie> = new Array(searchLength);
+
+        for (let i = 0; i < searchLength; ++ i) {
+
+          activeObject = Object(data).Search[i];
+
+          //console.log(activeObject.imdbID);
+
+          if (activeObject.Type === 'movie') {
+
+            //console.log(activeObject.Title + " Is A Movie");
+
+
+            
+    console.log("Obtaining Movie");
+
+    let activeMovie : Movie = new Movie("", "", "", "", "");
+
+    this.queryID(activeObject.imdbID).subscribe(
+      data2 => {
+
+        //console.log(data);
+
+        activeMovie.title = Object(data).Title;
+        activeMovie.release = Object(data).Released;
+        activeMovie.synopsis = Object(data).Plot;
+        activeMovie.genre = Object(data).Genre;
+        activeMovie.director = Object(data).Director;
+
+        //console.log(activeMovie);
+
+        this.foundMovie = activeMovie;
+
+        console.log(activeMovie);
+        console.log(this.foundMovie);
+
+      }
+    )
+
+            if (true) {
+            //this.queryMovie(activeObject.imdbID);
+            }
+
+            //console.log("Calling Active Movie : " );
+            //console.log(activeMovie);
+/*
+            while (this.foundMovie === null) { 
+
+              console.log("Waiting For Movie");
+
+            }
+*/
+
+            if (this.foundMovie) {
+
+            for (let j = 0; j < 1000; ++ j) {
+
+              console.log(this.foundMovie);
+
+            }
+
+            console.log("Caller Sees");
+            console.log(this.foundMovie);
+
+            movies[i] = this.foundMovie as Movie;
+
+            }
+
+          }
+          else {
+
+            movies[i] = new Movie("No Movie Found", "", "", "", "");
+
+          }
+
+        } // << End For Loop
+
+        this.returnMovies[0] = movies;
+
+      }
+    )
+   /*
+    while (this.returnMovies[0] === null) {
+      console.log("Waiting FOr Movies");
+    }
+*/
+
+    return new Observable()//<Array<Array<Movie>>>().body(this.returnMovies);// as Observable<Array<Array<Movie>>>;
+
+  }
+
+  public queryMovie(imdbID : String) : void {
+
+    console.log("Obtaining Movie");
+
+    let activeMovie : Movie = new Movie("", "", "", "", "");
+
+    this.queryID(imdbID).subscribe(
+      data => {
+
+        //console.log(data);
+
+        activeMovie.title = Object(data).Title;
+        activeMovie.release = Object(data).Released;
+        activeMovie.synopsis = Object(data).Plot;
+        activeMovie.genre = Object(data).Genre;
+        activeMovie.director = Object(data).Director;
+
+        //console.log(activeMovie);
+
+        this.foundMovie = activeMovie;
+
+        console.log(activeMovie);
+        console.log(this.foundMovie);
+
+      }
+    )
+
+  }
+
+
+
+
+
+
+
+  public queryTitle(title : String) : Observable<ArrayBuffer> {
+
+    console.log("Title Check For : " + title);
+
+    let titleURL = this.formatURLDataT(title);
+
+    console.log("Prepared URL : " + titleURL);
+
+    //return new Observable<ArrayBuffer>();
+
+    return this.httpclient.get<ArrayBuffer>(titleURL.toString()) as Observable<ArrayBuffer>;
+
+  }
+
+  public queryResults(title : String) : Observable<any> {
+
+    console.log("Results Check For : " + title);
+
+    let resultsURL = this.formatURLResultsS(title);
+
+    console.log("Prepared URL : " + resultsURL);
+
+    //return new Observable<ArrayBuffer>();
+
+    return this.httpclient.get<any>(resultsURL.toString());
+
+  }
+  
+  public queryID(ID : String) : Observable<ArrayBuffer> {
+
+    console.log("Results Check For : " + ID);
+
+    let resultsURL = this.formatURLimdbID(ID);
+
+    console.log("Prepared URL : " + resultsURL);
+
+    //return new Observable<ArrayBuffer>();
+
+    return this.httpclient.get<ArrayBuffer>(resultsURL.toString());
+
+  }
+
+
+  public formatURLDataT(title : String) : String {
+
+    console.log("Starting Title : " + title);
+
+    let apiquery : String = 
+      this.apiURL.toString()
+      + this.dataQuery.toString()
+      + title.toString()
+      + this.apiKeyTag.toString()
+      + this.apiKey.toString()
+    ;
+      
+    console.log("created URL : " + apiquery);
+
+    return apiquery;
+
+  }
+
+
+  public formatURLResultsS(title : String) : String {
+
+    console.log("Starting Title : " + title);
+
+    let apiquery : String = 
+      this.apiURL.toString()
+      + this.resultsQuery.toString()
+      + title.toString()
+      + this.apiKeyTag.toString()
+      + this.apiKey.toString()
+    ;
+      
+    console.log("created URL : " + apiquery);
+
+    return apiquery;
+
+  }
+
+  
+  public formatURLimdbID(ID : String) : String {
+
+    console.log("Starting ID : " + ID);
+
+    let apiquery : String = 
+      this.apiURL.toString()
+      + this.idQuery.toString()
+      + ID.toString()
+      + this.apiKeyTag.toString()
+      + this.apiKey.toString()
+    ;
+      
+    console.log("created URL : " + apiquery);
+
+    return apiquery;
+
+  }
+
+
+}

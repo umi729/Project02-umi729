@@ -1,0 +1,88 @@
+
+#DetailsPageTitle {
+
+  margin-top : 20px;
+
+  font-size : 40px;
+  font-weight : 200px;
+
+  text-align : center;
+
+}
+
+
+#DetailsTableHeader {
+
+  text-align : center;
+  
+  font-weight : 300;
+
+}
+
+#DetailsPosterHolder {
+
+  text-align : center;
+  padding-top : 10px;
+  padding-bottom : 15px;
+
+}
+
+#DetailsAccoridanHolder {
+
+  margin-top : 10px;
+
+  margin-left : 15%;
+  margin-right : 5%;
+
+}
+
+#DetailsAccordian2Title, #DetailsAccordian3Title {
+
+  font-size : 16px;
+  font-weight : 500;
+
+  width : 100%;
+  height : 100%;
+
+  outline : unset;
+  box-shadow: none;
+  border : none;
+
+}
+
+#DetailsAccordian1Title, #DetailsAccordian1Title:active, #DetailsAccordian1Title:focus {
+  
+  font-size : 26px;
+  font-weight : 600;
+
+
+  outline : unset;
+  box-shadow: none;
+  border : none;
+
+}
+
+
+
+
+#DetailsStars {
+
+  margin-left : 16%;
+
+  font-size : 30px;
+  color : rgb(200, 170, 100);
+
+}
+
+#DetailsStarCount {
+
+  font-size: 18px;
+  color: rgb(200, 170, 100);
+
+}
+
+.mat-warn {
+    background-color: #ffffff;
+    color: #ff1515;
+
+}

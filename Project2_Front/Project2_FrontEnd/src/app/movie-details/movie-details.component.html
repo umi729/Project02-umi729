@@ -1,0 +1,142 @@
+
+<h1 id = "DetailsPageTitle"> {{movieData?.Title}} </h1>
+
+<table class="table table-bordered table-striped table-light table-hover
+      table-sm" style = "width : 100%; margin-top: 20px;"
+    id="movieList">
+    <thead class="thead-light">
+      
+      <tr>
+        <th scope = "col" class = "col-sm-4" id="DetailsTableHeader"> Poster </th>
+
+        <th scope="col" class = "col-sm-8" id="DetailsTableHeader">  Data </th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td>
+        <div id = "DetailsPosterHolder">
+
+          <img src={{movieData?.Poster}} >
+        </div>
+        </td>
+        <td>
+         
+          <div id = "DetailsAccordianHolder" class="col-sm-12">
+            <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+              <ngb-panel>
+                <ng-template ngbPanelHeader let-opened="opened">
+                  <div class="d-flex justify-content-start"
+                    style="padding-left : 30px;">
+                  
+                  <button mat-fab color="warn" aria-label="favorite icon" (click)="onFav()"
+                    class="" id="DetailsFavoriteButton">
+                            <mat-icon>favorite</mat-icon>
+                  </button>
+
+                    <div class="d-flex justify-content-center col-sm-10"
+                      style="margin-left : -20px">
+                    <button id = "DetailsAccordian1Title"
+                      ngbPanelToggle class="btn"> {{movieData?.Title}} </button>
+                    
+                      <!-- <br>
+                      <div class = "d-flex justify-content-start">
+                        <ngb-rating [(rate)]="currentRate"
+                          id = "DetailsStars"></ngb-rating>
+                        <p> &nbsp; : </p>
+                        <p id="DetailsStarCount">&nbsp;   {{currentRate}} Stars!! </p>
+                      </div> -->
+                    </div>
+                  </div>
+                  
+
+                </ng-template>
+                <ng-template ngbPanelContent>
+            <h3> Title : {{movieData?.Title}} : Details </h3>
+            <p> Runtime : {{movieData?.Runtime}} </p>
+            <p> Released : {{movieData?.Released}} </p>
+            <p> Genre : {{movieData?.Genre}} </p>
+            <p> Plot : {{movieData?.Plot}} </p>
+                </ng-template>
+              </ngb-panel>
+              <ngb-panel id="DetailsAccordian2Holder">
+                <ng-template ngbPanelHeader>
+                  
+                    <button id = "DetailsAccordian2Title"
+                      ngbPanelToggle data-target="DetailsAccordian2Holder" class="btn"> Movie Reception / Statistics </button>
+                    
+
+                </ng-template>
+
+                <ng-template ngbPanelContent>
+
+                  <p> Language : {{movieData?.Language}} </p>
+                  <p> Country : {{movieData?.Country}} </p>
+                  <div>
+                    <p> Outside Review Statistics </p>
+                    <ul *ngFor = "let t of movieData?.Ratings">
+                      <li>
+                        {{t.Source}} : {{t.Value}}
+                      </li>
+                    </ul>
+                  </div>
+                  
+                </ng-template>
+              </ngb-panel>
+              <ngb-panel id="DetailsAccordian3Holder">
+                
+                <ng-template ngbPanelHeader>
+                  
+                    <button id = "DetailsAccordian3Title"
+                      ngbPanelToggle data-target="DetailsAccordian3Holder" class="btn"> Production Staff </button>
+                    
+
+                </ng-template>
+
+                <ng-template ngbPanelContent>
+                  <p> Writer : {{movieData?.Writer}} </p>
+                  <p> Director : {{movieData?.Director}} </p>
+                  <p> Actors : {{movieData?.Director}} </p>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+    
+            <br>
+            
+            <br>
+            
+
+
+          </div>
+          
+        </td>
+      </tr>
+     
+    </tbody>
+  </table>
+
+
+<!--
+<div id = "Movie Information">
+
+
+<button mat-fab color="warn" aria-label="favorite icon" (click)="onFav()">
+          <mat-icon>favorite</mat-icon>
+</button>
+
+
+
+</div>
+-->
+
+<!-- 
+<ngb-rating [(rate)]="averageRate" ></ngb-rating>
+<hr>
+<pre>Average Rating: <b>{{averageRate}}</b></pre> -->
+
+
+<app-reviews></app-reviews>
+<!--
+</div>
+--> 

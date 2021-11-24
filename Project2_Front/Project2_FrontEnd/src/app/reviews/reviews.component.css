@@ -1,0 +1,147 @@
+
+#ReviewsDiv {
+
+  margin-top : 50px;
+  margin-bottom : 120px;
+
+}
+
+#ReviewsTitleDiv {
+
+
+  align-items : center;
+  justify-content : center;
+
+
+}
+
+#ReviewsTitle {
+
+  font-size : 60px;
+  font-weight : 300;
+
+}
+
+#ReviewsStars {
+
+  padding-bottom : 14px;
+
+  margin-left : -30px;
+
+  font-size : 30px;
+  color : rgb(200, 170, 100);
+
+}
+
+#ReviewsAddText {
+
+  font-size : 25px;
+  font-weight : 500;
+
+
+  align-items : center;
+  justify-content : center;
+
+
+
+}
+
+#ReviewsStarCount {
+
+  
+
+  font-size: 18px;
+  color: rgb(200, 170, 100);
+
+}
+
+#review-content {
+
+  margin-right : 2%;
+
+}
+
+#ReviewsStarEntry {
+
+  align-items : center;
+  justify-content : center;
+
+
+}
+
+#ReviewsTableTitle {
+
+  font-size : 30px;
+
+  padding-bottom : 15px;
+
+
+}
+
+#ReviewsEntryField {
+
+  align-items : center;
+  justify-content : center;
+
+}
+
+#ReviewsBarrierLine {
+
+  margin-bottom : 50px;
+  margin-top : 30px;
+
+  border-color : rgb(180, 150, 80);
+
+  border-style : dotted;
+  border-width : 7px;
+
+
+
+}
+
+#ReviewsDisplayList {
+
+  margin-left : 7%;
+  margin-right : 7%;
+  
+  align : center;
+  justify : center;
+
+
+}
+
+#ReviewsAverageRating {
+
+  padding-top : 5px;
+
+  background-color : rgb(130, 130, 130);
+
+  height : 50px;
+
+  width : 100%;
+  
+  align-items : center;
+  justify-content : center;
+
+
+}
+
+#ReviewsAverageRatingText {
+
+  margin-top : 15px;
+
+  font-weight : 900;
+  font-size : 30px;
+
+
+}
+
+#ReviewsAverageRatingTextContainer {
+
+
+
+  align-items : center;
+  justify-content : center;
+
+
+}

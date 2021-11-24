@@ -1,0 +1,120 @@
+
+<div id = "ReviewsDiv">
+
+<p id="ReviewsBarrierLine"></p>
+
+
+<div id="ReviewsTitleDiv" class="d-flex">
+
+    <h1 id ="ReviewsTitle"> R E V I E W S</h1>
+
+
+</div>
+
+<p id="ReviewsBarrierLine"></p>
+
+
+<div id="ReviewsAverageRatingTextContainer" class = "d-flex flex-column">
+
+<h2 id="ReviewsAverageRatingText"> Average Moviebook Review </h2>
+
+
+<div class = "d-flex"  id="ReviewsAverageRating">
+
+<p class="col-sm-1"></p>
+
+
+<ng-template #t let-fill="fill">
+  <span class="star" [class.full]="fill === 100">
+    <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+  </span>
+</ng-template>
+<ngb-rating [(rate)]="average" [starTemplate]="t" [readonly]="true" [max]="10"></ngb-rating>
+
+<p class="col-sm-1"></p>
+
+
+</div>
+
+
+
+<h2 id="ReviewsAverageRatingText"> {{average }} </h2>
+
+
+</div>
+
+<p id="ReviewsBarrierLine"></p>
+
+<div id = "ReviewsDisplayList">
+
+<table class="table table-striped table-light table-hover
+          table-sm">
+    <thead class="thead-light" style = "height : 50px">
+        <tr style = "padding: 20px;">
+            <!-- <th> Review ID </th>
+            <th> Star Rating </th> -->
+            <th  class = "text-center" id="ReviewsTableTitle"> 
+                Previous Reviews
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let r of reviews" >
+
+<!-- 
+    public username : string;
+    public movie : Movie;
+    public starRating : number;
+    public reviewContent : string; -->
+
+            <!-- <td>
+                {{r.rid}}
+            </td>
+            <td>
+                {{r.starRating}}
+            </td> -->
+            <td scope="row" class = "text-center">
+                {{r.review}}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</div>
+
+
+<p id="ReviewsBarrierLine"></p>
+
+
+<form class="review-form" #form='ngForm' novalidate (ngSubmit)="submitReview()">
+    
+    <div class = "d-flex" id="ReviewsStarEntry">
+
+        <h3 id="ReviewsAddText">Add your own review:</h3>
+
+        <p class = "col-sm-2">&nbsp;                    &nbsp;</p>
+
+        <ngb-rating [(rate)]="currentStars"
+            id = "ReviewsStars"></ngb-rating>
+        <p> &nbsp; : </p>
+        <p id="ReviewsStarCount">&nbsp;   {{currentStars}} Stars!! </p>
+    </div>
+
+        <!-- <label for="rating-input">Rating:</label>
+    <input type="number" id="rating-input" name="rating" min=1 max=10 [(ngModel)]="rating"> -->
+    <br>
+    <div id = "ReviewsEntryField" class="d-flex">
+    <textarea id="review-content" name="content" 
+        rows="5" cols="50" [(ngModel)]="content"
+        class="col-sm-9"></textarea>
+    <button type="submit" class = "col-sm-1">Post Review</button>
+
+    </div>
+</form>
+
+<p id="ReviewsBarrierLine"></p>
+
+
+</div>
+
+<p>&nbsp;</p>
